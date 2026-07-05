@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faqs = [
+  {
+    q: "What to expect from a session with Kim",
+    a: [
+      "When you schedule a session with Kim, you are inviting communication with not only Kim, but a host of other interested parties: your spirit guides and teachers, departed friends and loved ones, the angelic realm, and other life forms and energies that may have a need or desire to share their thoughts and love with you. As both a conscious and trance medium, Kim acts as a doorway for communication to occur.",
+      "A session typically begins with Kim presenting an overview of your current state of affairs, indicating any particularly pressing issues. Questions are always welcome and encouraged to ensure that you comprehend the messages. Each session is different, depending on the needs of the individual Kim is reading for — some sessions focus only on the present time while others deal predominately with issues from the past or the future.",
+    ],
+  },
+  {
+    q: "How long of a session should I book?",
+    a: [
+      "If this is a new experience, you may want to start out with a one hour session. If you have a long list of questions and many topics to discuss, 1½ or 2 hours would ensure enough time to explore all of your questions.",
+      "There are many times when a scheduled session ends up not being enough time to answer all of your questions. If Kim's schedule permits, she will allow the session to continue, but an additional cost will be incurred for any time over the agreed upon length.",
+    ],
+  },
+  {
+    q: "Will you tell me if bad things are going to happen?",
+    a: [
+      "There are no “bad” things — there are only experiences and opportunities to learn and grow. Sometimes Kim is guided to share an event that could be considered negative, often communicated as a warning. The events and situations seen in your future can be changed — and that's usually why you are being given the information.",
+    ],
+  },
+  {
+    q: "How should I prepare for a session?",
+    a: [
+      "Begin by considering what questions or concerns you would like addressed — and write them down! Start a list of questions well before your appointment day.",
+      "Try to make sure your schedule allows you to be free of pressing business right before and after your appointment. Have an open mind with no expectations, and stay calm knowing that no one can tell you anything that can affect you without your permission.",
+    ],
+  },
+  {
+    q: "How do phone sessions work?",
+    a: [
+      "You will be instructed to call Kim at the designated appointment time and the session will proceed just as if you were in the room together. The psychic energy that Kim employs knows no time, no distance — many clients are out of state and have enjoyed reliably good sessions on the telephone.",
+    ],
+  },
+  {
+    q: "Are in-person sessions better?",
+    a: [
+      "Not better — but different. If it's possible for you to meet Kim and have a session in-person, you won't be disappointed; she really does enjoy meeting her clients.",
+    ],
+  },
+  {
+    q: "Can you tell me about my spirit guides?",
+    a: [
+      "Sometimes the guides and teachers will readily present themselves with full introductions, including names. Other times, all Kim sees is a light, an energy, or a feeling about forces around you — it's not always within her control, and sometimes it's for you to discover on your own.",
+    ],
+  },
+  {
+    q: "Can I talk with friends or relatives that have passed on?",
+    a: [
+      "Yes, but there are no guarantees they will be available to communicate with you. Depending on when and how they passed, they may not be able to converse with us. Even if communicating directly is not an option, Kim will always try to obtain as much information as possible about them to share with you.",
+    ],
+  },
+  {
+    q: "Can you tell me about my past lives?",
+    a: [
+      "Yes, if it is relevant to your questions or the information being shared with you. If the guides deem it necessary for your understanding, Kim will be shown that lifetime. The guides and teachers seem to know best in these circumstances, and Kim trusts that only information you can handle and benefit from will be offered.",
+    ],
+  },
+  {
+    q: "Can you tell me the winning lottery numbers?",
+    a: [
+      "It's just not the kind of question that spirit likes to answer for us — our main focus should not be on financial gain but on learning and growing. Even if it were possible, it would be against Kim's personal code of ethics.",
+    ],
+  },
+];
+---
+<Layout
+  title="FAQs — Kimberly Dumaine"
+  description="Frequently asked questions about sessions with Kimberly Dumaine — what to expect, how to prepare, phone vs. in-person, past lives, spirit guides and more."
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-kicker center">Common Questions</p>
+      <h1>Frequently Asked <em>Questions</em></h1>
+      <p>Answers to what clients most often wonder before their first session.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="page-content">
+      <div class="container">
+        <div class="faq-list">
+          {faqs.map((item) => (
+            <details class="faq-item">
+              <summary>{item.q}</summary>
+              <div class="faq-item-body">
+                {item.a.map((para) => (<p>{para}</p>))}
+              </div>
+            </details>
+          ))}
+        </div>
+        <div class="page-cta">
+          <a href={`${import.meta.env.BASE_URL}request-a-session/`} class="btn btn-glow">Ask Kim Directly — Request a Session</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

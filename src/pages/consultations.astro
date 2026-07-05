@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const types = [
+  { glyph: "☽", title: "Life Assessment Sessions", copy: "A clairvoyant reading of where you stand — illuminating patterns, blocks, and the many paths open before you." },
+  { glyph: "✧", title: "Trance Session with Dr. Peebles", copy: "Speak directly with the spirit of Dr. James Martin Peebles as he answers through Kim in deep trance. Private & group sessions." },
+  { glyph: "❋", title: "Spiritual Counseling", copy: "Compassionate one-on-one guidance to move through grief, transition, and awakening with clarity and grace." },
+  { glyph: "✵", title: "Career & Business Counseling", copy: "Intuitive insight for decisions, direction, and alignment — bringing your work into harmony with your purpose." },
+  { glyph: "⌂", title: "House & Property Blessing", copy: "Energy cleansing and blessing for homes and spaces — clearing what lingers, inviting in light and peace." },
+  { glyph: "🐾", title: "Animal Communication", copy: "The animal kingdom speaks. Kim listens — connecting you with the thoughts and feelings of your beloved companions." },
+];
+---
+<Layout
+  title="Consultations & Offerings — Kimberly Dumaine"
+  description="Explore the private and group consultations Kim offers — life assessment readings, trance sessions with Dr. Peebles, spiritual counseling, career guidance, house blessings, and animal communication."
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-kicker center">Ways to Work Together</p>
+      <h1>Consultations &amp; <em>Offerings</em></h1>
+      <p>Thought-provoking, life-changing sessions tailored to your path.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="page-content">
+      <div class="container">
+        <div class="prose">
+          <p>
+            Scheduling a session with Kim can be an important part of your spiritual
+            development, providing you with a wonderful opportunity to increase your
+            awareness and understand the power that you possess to change any element in
+            your life. With Kim&rsquo;s unique abilities, she will help bring to your
+            conscious awareness the beliefs and choices that are creating your current
+            life experiences.
+          </p>
+          <p>
+            Many types of sessions are available, depending on your specific needs, and can
+            be scheduled at your convenience, by appointment only. You can expect a frank,
+            down-to-earth approach to your questions and concerns, mixed with a healthy
+            dose of good-natured humor and light-heartedness.
+          </p>
+        </div>
+
+        <div class="type-grid">
+          {types.map((t) => (
+            <div class="offer-card">
+              <span class="offer-glyph" aria-hidden="true">{t.glyph}</span>
+              <h3>{t.title}</h3>
+              <p>{t.copy}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="prose" style="margin-top: 40px; text-align: center; color: var(--text-dim);">
+          Gift certificates are available for any of the above sessions upon request.
+        </p>
+
+        <div class="page-cta">
+          <a href={`${import.meta.env.BASE_URL}request-a-session/`} class="btn btn-glow">Request a Private Session</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

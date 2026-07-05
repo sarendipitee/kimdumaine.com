@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const testimonials = [
+  { quote: "Kim is both an extraordinary channel for the beloved Dr. Peebles as well as in possession of a refined sense of intuition herself. The advice she gives in her own readings is down to earth, firm yet loving. I feel fortunate to have her as a trusted advisor.", who: "A. Clark, Healing Practitioner — VA" },
+  { quote: "Kim's ability is second to none. I never knew I even had spirit guides around me until Kim introduced them to me. I truly believe there is not anyone more gifted than her.", who: "RJS, Scottsdale, AZ" },
+  { quote: "She is uncannily accurate about what is going on in my life and physical health. Her advice is dispensed with compassion, common sense and humor. She is also a superb channeler of the entity Dr. Peebles.", who: "TL, Scottsdale, AZ" },
+  { quote: "Kim is warm, funny, caring and amazingly intuitive. A very gifted and capable medium and channel, she has never failed to help me when I needed it.", who: "DL, Phoenix, AZ" },
+  { quote: "What a privilege it is to know Dr. Peebles through Kim Dumaine. Both of them have forever changed my life with their insights, specific knowledge, and gentle guidance.", who: "M.R., Scottsdale, AZ" },
+  { quote: "I feel more confident in making my major life decisions when I consult with Kim. I find that this peace of mind is priceless and saves me countless hours of unnecessary worry.", who: "Dr. Sonja Pettersen, Naturopathic Medical Doctor — Scottsdale, AZ" },
+  { quote: "Kim is a wonderful spiritual counselor; she never fails to help me see the big picture and my higher purpose in every situation. She is the gold standard — the baseline that I compare everyone else to.", who: "M.G., Attorney — St. Louis, Missouri" },
+  { quote: "I have worked with Kim consistently for the last 6 years — from career development to house hunting, relationship issues, pet communication and personal growth. Her gifts are amazing and my referrals are always thankful.", who: "Karin Carlson-Morgan, Healing Practitioner — Seattle, WA" },
+  { quote: "I have worked with Kim Dumaine for the last 10 years. She is one of the most amazing clairvoyants I have ever worked with. Her readings are always positive, insightful, and provide practical tools for you to use moving forward.", who: "Teri Sahm, Seattle, WA" },
+  { quote: "Kim has a way of getting to the root of the problem with a no-nonsense, direct approach that was energizing and very effective for me. After my session, I felt very clear and calm.", who: "R. W., Phoenix, AZ" },
+  { quote: "My reading with Kim helped me make some critical decisions about how to enrich my life at all levels — spiritual, personal and professional. She delivered the reading with great insight, warmth, and respect.", who: "Dave R., Enfield, NH" },
+  { quote: "I've had readings from Kim over the last 15 years. She is equally skilled advising you about your life purpose and soul's mission as she is about helping you decide if it's time to buy a new car.", who: "M.G., Attorney" },
+];
+---
+<Layout
+  title="Testimonials — Kimberly Dumaine"
+  description="Read what clients say about their sessions with Kimberly Dumaine — psychic medium, spiritual counselor, and trance channel for Dr. James Martin Peebles."
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-kicker center">In Their Words</p>
+      <h1>Client <em>Testimonials</em></h1>
+      <p>Many have had the opportunity to experience Kim and the wisdom she shares.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="page-content">
+      <div class="container">
+        <div class="testimonial-grid">
+          {testimonials.map((t) => (
+            <blockquote class="testimonial-card">
+              <p>&ldquo;{t.quote}&rdquo;</p>
+              <cite>{t.who}</cite>
+            </blockquote>
+          ))}
+        </div>
+        <div class="page-cta">
+          <a href={`${import.meta.env.BASE_URL}request-a-session/`} class="btn btn-glow">Request Your Own Session</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

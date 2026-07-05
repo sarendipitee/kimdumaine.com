@@ -787,3 +787,123 @@ a { color: var(--cyan); text-decoration: none; }
 @media (max-width: 800px) {
   .footer-grid { grid-template-columns: 1fr; gap: 40px; }
 }
+
+/* ═══════════════ INNER PAGE HERO ═══════════════ */
+
+.page-hero {
+  position: relative;
+  padding: calc(var(--nav-h) + 100px) 0 90px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(69, 39, 160, 0.28), transparent),
+    var(--night-0);
+  border-bottom: 1px solid var(--hairline);
+}
+.page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 18px; }
+.page-hero p { max-width: 680px; margin: 0 auto; color: var(--text-dim); }
+
+/* ═══════════════ PROSE / CONTENT PAGES ═══════════════ */
+
+.page-content {
+  padding: 100px 0 130px;
+  background: var(--night-1);
+}
+
+.prose {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.prose p { color: var(--text); }
+.prose h2 { margin: 1.6em 0 0.6em; font-size: clamp(1.5rem, 3vw, 2rem); }
+.prose h2:first-child { margin-top: 0; }
+
+.simple-list {
+  max-width: 760px;
+  margin: 30px auto 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.simple-list li {
+  padding: 20px 26px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(19, 26, 69, 0.4), rgba(8, 11, 32, 0.5));
+  color: var(--text);
+}
+
+/* FAQ accordion */
+.faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 14px; }
+.faq-item {
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(19, 26, 69, 0.4), rgba(8, 11, 32, 0.5));
+  overflow: hidden;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 22px 28px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  color: var(--cyan);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item-body { padding: 0 28px 26px; color: var(--text-dim); }
+.faq-item-body p + p { margin-top: 1em; }
+
+/* Testimonials */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.testimonial-card {
+  padding: 32px 30px;
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  background: linear-gradient(160deg, rgba(19, 26, 69, 0.4), rgba(8, 11, 32, 0.5));
+}
+.testimonial-card p { color: var(--text); font-style: italic; }
+.testimonial-card cite {
+  display: block;
+  margin-top: 18px;
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+@media (max-width: 800px) {
+  .testimonial-grid { grid-template-columns: 1fr; }
+}
+
+/* Consultation type cards (link list variant of offer-card) */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+}
+@media (max-width: 980px) { .type-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .type-grid { grid-template-columns: 1fr; } }
+
+.page-cta {
+  text-align: center;
+  margin-top: 60px;
+}
