@@ -297,7 +297,9 @@ a { color: var(--cyan); text-decoration: none; }
   }
   .site-nav.open nav { display: block; }
   .nav-list { flex-direction: column; align-items: stretch; gap: 2px; }
-  .sub-menu {
+  .sub-menu,
+  .has-sub:hover .sub-menu,
+  .has-sub:focus-within .sub-menu {
     position: static;
     translate: none;
     opacity: 1;
