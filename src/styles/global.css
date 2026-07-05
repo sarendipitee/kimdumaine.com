@@ -38,6 +38,7 @@ body {
   font-size: 17px;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
@@ -813,9 +814,14 @@ a { color: var(--cyan); text-decoration: none; }
 
 .prose {
   max-width: 760px;
+	font-size: 1.2em;
+	line-height: 1.6;
   margin: 0 auto;
+	color: oklch(0.92 0.01 323.22 / 1);
 }
-.prose p { color: var(--text); }
+.prose p { 
+	color: var(--text); 
+}
 .prose h2 { margin: 1.6em 0 0.6em; font-size: clamp(1.5rem, 3vw, 2rem); }
 .prose h2:first-child { margin-top: 0; }
 
