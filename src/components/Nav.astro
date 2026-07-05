@@ -8,35 +8,34 @@
   <nav aria-label="Primary">
     <ul class="nav-list">
       <li><a href="#top" class="nav-link active">Home</a></li>
-      <li><a href="#about" class="nav-link">About Kim</a></li>
+      <li><a href={`${import.meta.env.BASE_URL}about-kim/`} class="nav-link">About Kim</a></li>
       <li class="has-sub">
-        <a href="#offerings" class="nav-link">Consultations <span class="caret" aria-hidden="true">▾</span></a>
+        <a href={`${import.meta.env.BASE_URL}consultations/`} class="nav-link">Consultations <span class="caret" aria-hidden="true">▾</span></a>
         <ul class="sub-menu">
-          <li><a href="#">Life Assessment Sessions</a></li>
-          <li><a href="#">Trance Session with Dr.&nbsp;Peebles</a></li>
-          <li><a href="#">Spiritual Counseling</a></li>
-          <li><a href="#">Career &amp; Business Counseling</a></li>
-          <li><a href="#">House &amp; Property Blessing / Energy Cleansing</a></li>
-          <li><a href="#">Animal Communication</a></li>
-          <li class="sub-cta"><a href="#">Request a Private Session</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}consultations/`}>Life Assessment Sessions</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}consultations/`}>Trance Session with Dr.&nbsp;Peebles</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}consultations/`}>Spiritual Counseling</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}consultations/`}>Career &amp; Business Counseling</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}consultations/`}>House &amp; Property Blessing / Energy Cleansing</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}consultations/`}>Animal Communication</a></li>
+          <li class="sub-cta"><a href={`${import.meta.env.BASE_URL}request-a-session/`}>Request a Private Session</a></li>
         </ul>
       </li>
       <li class="has-sub">
-        <a href="#peebles" class="nav-link">Spirit Communication <span class="caret" aria-hidden="true">▾</span></a>
+        <a href={`${import.meta.env.BASE_URL}spirit-communication/`} class="nav-link">Spirit Communication <span class="caret" aria-hidden="true">▾</span></a>
         <ul class="sub-menu">
-          <li><a href="#">About Dr.&nbsp;Peebles</a></li>
-          <li><a href="#">Channeling Dr.&nbsp;Peebles</a></li>
-          <li><a href="#">Philosophy of Living</a></li>
-          <li><a href="#">Trance Channeling Sessions</a></li>
-          <li><a href="#">Audio Recordings</a></li>
-          <li class="sub-cta"><a href="#">Request a Private Session</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}spirit-communication/`}>About Dr.&nbsp;Peebles</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}spirit-communication/`}>Channeling Dr.&nbsp;Peebles</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}spirit-communication/`}>Philosophy of Living</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}spirit-communication/`}>Trance Channeling Sessions</a></li>
+          <li class="sub-cta"><a href={`${import.meta.env.BASE_URL}request-a-session/`}>Request a Private Session</a></li>
         </ul>
       </li>
-      <li><a href="#" class="nav-link">FAQs</a></li>
-      <li><a href="#events" class="nav-link">Calendar</a></li>
+      <li><a href={`${import.meta.env.BASE_URL}faqs/`} class="nav-link">FAQs</a></li>
+      <li><a href={`${import.meta.env.BASE_URL}testimonials/`} class="nav-link">Testimonials</a></li>
     </ul>
   </nav>
-  <a href="#" class="nav-session-btn">Request a Session</a>
+  <a href={`${import.meta.env.BASE_URL}request-a-session/`} class="nav-session-btn">Request a Session</a>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
