@@ -55,6 +55,7 @@
 	/* ═══════════════ COSMOS CANVAS ═══════════════ */
 
 	const canvas = document.getElementById("cosmos");
+	if (!canvas) return;
 	const ctx = canvas.getContext("2d");
 
 	let W = 0,
@@ -179,7 +180,7 @@
 		bandBottom: 0.9, // bottom of the stack
 		alpha: 0.3, // line opacity — keep whisper-quiet
 		lineWidth: 0.5,
-		segments: 360, // horizontal sample resolution per line
+		segments: 180, // horizontal sample resolution per line (halved: plenty smooth for these low frequencies, halves per-frame path cost)
 
 		baseAmp: 10, // wave height in px
 
@@ -221,9 +222,77 @@
 		motes = [],
 		shooting = null;
 
+	/* ── offscreen glow sprites: bake radial gradients ONCE, blit with
+	   drawImage per frame instead of createRadialGradient every frame.
+	   Firefox's canvas2d gradient allocation is much slower than Chrome's,
+	   so this is the single biggest win for cross-browser FPS parity. ── */
+	function makeGlowSprite(rgb, stops) {
+		const size = 512;
+		const c = document.createElement("canvas");
+		c.width = c.height = size;
+		const g = c.getContext("2d");
+		const grad = g.createRadialGradient(
+			size / 2,
+			size / 2,
+			0,
+			size / 2,
+			size / 2,
+			size / 2,
+		);
+		for (const [offset, a] of stops) {
+			grad.addColorStop(offset, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`);
+		}
+		g.fillStyle = grad;
+		g.fillRect(0, 0, size, size);
+		return c;
+	}
+
+	const NEBULA_SPRITE_STOPS = [
+		[0, 1],
+		[0.55, 0.35],
+		[1, 0],
+	];
+	const MOTE_GLOW_STOPS = [
+		[0, 1],
+		[0.4, 0.35],
+		[1, 0],
+	];
+	const MOTE_SPRITE_SCALE = 16; // px per unit-radius in the baked sprite
+
+	function makeMoteSprite(rgb) {
+		const size = 5 * 2 * MOTE_SPRITE_SCALE; // glow radius 5 units, both sides
+		const c = document.createElement("canvas");
+		c.width = c.height = size;
+		const g = c.getContext("2d");
+		const center = size / 2;
+		const glow = g.createRadialGradient(
+			center,
+			center,
+			0,
+			center,
+			center,
+			5 * MOTE_SPRITE_SCALE,
+		);
+		for (const [offset, a] of MOTE_GLOW_STOPS) {
+			glow.addColorStop(offset, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`);
+		}
+		g.fillStyle = glow;
+		g.beginPath();
+		g.arc(center, center, 5 * MOTE_SPRITE_SCALE, 0, TAU);
+		g.fill();
+		g.fillStyle = "rgba(255,255,255,0.9)";
+		g.beginPath();
+		g.arc(center, center, 0.55 * MOTE_SPRITE_SCALE, 0, TAU);
+		g.fill();
+		return c;
+	}
+
+	const moteSprites = MOTE_TINTS.map(makeMoteSprite);
+
 	function buildScene() {
 		clouds = NEBULA_HUES.map((rgb, i) => ({
 			rgb,
+			sprite: makeGlowSprite(rgb, NEBULA_SPRITE_STOPS),
 			// anchor position (fractions of viewport) + slow orbital drift
 			ax: rand(0.05, 0.95),
 			ay: rand(0.1, 0.95),
@@ -282,11 +351,13 @@
 
 	/* rising spirit motes — glowing orbs ascending softly */
 	function newMote(anywhere) {
+		const tintIdx = (Math.random() * MOTE_TINTS.length) | 0;
 		return {
 			x: Math.random(),
 			y: anywhere ? Math.random() : rand(1.02, 1.15),
 			r: rand(1.2, 3.4),
-			tint: MOTE_TINTS[(Math.random() * MOTE_TINTS.length) | 0],
+			tint: MOTE_TINTS[tintIdx],
+			sprite: moteSprites[tintIdx],
 			vy: rand(0.008, 0.022), // fraction of height per second
 			sway: rand(0.004, 0.014),
 			swaySpeed: rand(0.2, 0.6),
@@ -346,27 +417,20 @@
 			const y = (c.ay + Math.cos(t * c.speed * 0.8 + c.phase) * c.orbitY) * H;
 			const r = c.r * maxSide;
 			const breath = 1 + 0.18 * Math.sin(t * c.pulse + c.phase);
-			const a = c.alpha * breath;
-			const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-			g.addColorStop(0, `rgba(${c.rgb[0]},${c.rgb[1]},${c.rgb[2]},${a})`);
-			g.addColorStop(
-				0.55,
-				`rgba(${c.rgb[0]},${c.rgb[1]},${c.rgb[2]},${a * 0.35})`,
-			);
-			g.addColorStop(1, "rgba(0,0,0,0)");
-			ctx.fillStyle = g;
-			ctx.fillRect(x - r, y - r, r * 2, r * 2);
+			ctx.globalAlpha = c.alpha * breath;
+			ctx.drawImage(c.sprite, x - r, y - r, r * 2, r * 2);
 		}
+		ctx.globalAlpha = 1;
 		ctx.globalCompositeOperation = "source-over";
 	}
 
-	/* stacked FM wave lines — drawn above the nebula, beneath the stars */
-	function drawWaves(t) {
-		if (!WAVES.enabled) return;
-		const w = WAVES;
-		const band = w.bandBottom - w.bandTop;
+	/* the horizontal tint gradient only depends on W + tint knobs, not time —
+	   cache it instead of rebuilding it every frame */
+	let waveGradCache = null;
+	function waveGradient(w) {
+		const key = `${W}|${w.edgeFade}|${w.tintA}|${w.tintB}`;
+		if (waveGradCache && waveGradCache.key === key) return waveGradCache.grad;
 
-		// horizontal tint blend: violet → cyan → violet, with optional edge fade-in
 		const [ar, ag, ab] = w.tintA;
 		const [br, bg, bb] = w.tintB;
 		const grad = ctx.createLinearGradient(0, 0, W, 0);
@@ -384,9 +448,19 @@
 		grad.addColorStop(0.5, `rgba(${br},${bg},${bb},1)`);
 		grad.addColorStop(1, `rgba(${ar},${ag},${ab},${w.edgeFade > 0 ? 0 : 1})`);
 
+		waveGradCache = { key, grad };
+		return grad;
+	}
+
+	/* stacked FM wave lines — drawn above the nebula, beneath the stars */
+	function drawWaves(t) {
+		if (!WAVES.enabled) return;
+		const w = WAVES;
+		const band = w.bandBottom - w.bandTop;
+
 		ctx.save();
 		ctx.globalCompositeOperation = "lighter";
-		ctx.strokeStyle = grad;
+		ctx.strokeStyle = waveGradient(w);
 		ctx.lineWidth = w.lineWidth;
 
 		const breatheOsc = Math.sin(TAU * w.breatheSpeed * t);
@@ -499,20 +573,11 @@
 			// fade in near bottom, fade out near top
 			const fade = Math.min(1, (1.05 - m.y) * 4, m.y * 4 + 0.15);
 			const a = m.alpha * fade * (0.75 + 0.25 * Math.sin(t * 1.3 + m.phase));
-			const [r, g, b] = m.tint;
-			const glow = ctx.createRadialGradient(x, y, 0, x, y, m.r * 5);
-			glow.addColorStop(0, `rgba(${r},${g},${b},${a})`);
-			glow.addColorStop(0.4, `rgba(${r},${g},${b},${a * 0.35})`);
-			glow.addColorStop(1, "rgba(0,0,0,0)");
-			ctx.fillStyle = glow;
-			ctx.beginPath();
-			ctx.arc(x, y, m.r * 5, 0, TAU);
-			ctx.fill();
-			ctx.fillStyle = `rgba(255,255,255,${a * 0.9})`;
-			ctx.beginPath();
-			ctx.arc(x, y, m.r * 0.55, 0, TAU);
-			ctx.fill();
+			const d = m.r * 10; // glow diam = 2 * (m.r * 5), matches original arc radius
+			ctx.globalAlpha = a;
+			ctx.drawImage(m.sprite, x - d / 2, y - d / 2, d, d);
 		}
+		ctx.globalAlpha = 1;
 		ctx.globalCompositeOperation = "source-over";
 	}
 

@@ -1,60 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kimberly Dumaine — Psychic Medium, Spiritual Counselor &amp; Trance Channel</title>
-  <meta name="description" content="Kimberly Dumaine is a gifted psychic medium, spiritual counselor, and trance channel for Dr. James Martin Peebles, serving clients in Scottsdale, Arizona and worldwide for over 30 years." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
-  <!-- ═══════════════ NAVIGATION ═══════════════ -->
-  <header class="site-nav" id="siteNav">
-    <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span class="brand-name">Kimberly Dumaine</span>
-    </a>
-    <nav aria-label="Primary">
-      <ul class="nav-list">
-        <li><a href="#top" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About Kim</a></li>
-        <li class="has-sub">
-          <a href="#offerings" class="nav-link">Consultations <span class="caret" aria-hidden="true">▾</span></a>
-          <ul class="sub-menu">
-            <li><a href="#">Life Assessment Sessions</a></li>
-            <li><a href="#">Trance Session with Dr.&nbsp;Peebles</a></li>
-            <li><a href="#">Spiritual Counseling</a></li>
-            <li><a href="#">Career &amp; Business Counseling</a></li>
-            <li><a href="#">House &amp; Property Blessing / Energy Cleansing</a></li>
-            <li><a href="#">Animal Communication</a></li>
-            <li class="sub-cta"><a href="#">Request a Private Session</a></li>
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="#peebles" class="nav-link">Spirit Communication <span class="caret" aria-hidden="true">▾</span></a>
-          <ul class="sub-menu">
-            <li><a href="#">About Dr.&nbsp;Peebles</a></li>
-            <li><a href="#">Channeling Dr.&nbsp;Peebles</a></li>
-            <li><a href="#">Philosophy of Living</a></li>
-            <li><a href="#">Trance Channeling Sessions</a></li>
-            <li><a href="#">Audio Recordings</a></li>
-            <li class="sub-cta"><a href="#">Request a Private Session</a></li>
-          </ul>
-        </li>
-        <li><a href="#" class="nav-link">FAQs</a></li>
-        <li><a href="#events" class="nav-link">Calendar</a></li>
-      </ul>
-    </nav>
-    <a href="#" class="nav-session-btn">Request a Session</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import portrait from "../assets/kim-portrait.jpg";
+---
+<Layout
+  title="Kimberly Dumaine — Psychic Medium, Spiritual Counselor &amp; Trance Channel"
+  description="Kimberly Dumaine is a gifted psychic medium, spiritual counselor, and trance channel for Dr. James Martin Peebles, serving clients in Scottsdale, Arizona and worldwide for over 30 years."
+>
   <!-- ═══════════════ HERO ═══════════════ -->
   <section class="hero" id="top">
     <canvas id="cosmos" aria-hidden="true"></canvas>
@@ -105,7 +57,7 @@
         </div>
         <div class="welcome-aside reveal">
           <figure class="portrait-frame">
-            <img src="kim-portrait.jpg" alt="Kimberly Dumaine smiling outdoors" width="1600" height="2000" loading="lazy" />
+            <Image src={portrait} alt="Kimberly Dumaine smiling outdoors" width={1600} height={2000} loading="lazy" />
             <figcaption>
               <span class="portrait-name">Kimberly Dumaine</span>
               <span class="portrait-title">Trance&nbsp;Medium · Reiki&nbsp;Master · Hypnotherapist · Animal&nbsp;Communicator</span>
@@ -238,30 +190,4 @@
       </div>
     </section>
   </main>
-
-  <!-- ═══════════════ FOOTER ═══════════════ -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <span class="brand-mark" aria-hidden="true">✦</span>
-        <span class="brand-name">Kimberly Dumaine</span>
-        <p>Psychic Medium · Spiritual Counselor · Metaphysical Teacher<br />Scottsdale, Arizona — serving clients worldwide</p>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="#top">Home</a>
-        <a href="#about">About Kim</a>
-        <a href="#offerings">Consultations</a>
-        <a href="#peebles">Spirit Communication</a>
-        <a href="#">FAQs</a>
-        <a href="#events">Calendar</a>
-      </nav>
-      <div class="footer-cta">
-        <a href="#" class="btn btn-glow">Request a Session</a>
-      </div>
-    </div>
-    <p class="footer-fine">© 2026 Kimberly Dumaine · May love and light shine upon you always</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</Layout>
