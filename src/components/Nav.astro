@@ -2,7 +2,7 @@
 const isHome = Astro.url.pathname === import.meta.env.BASE_URL;
 ---
 <header class={`site-nav${isHome ? " nav-animate" : ""}`} id="siteNav">
-  <a class="brand" href="/">
+  <a class="brand" href={import.meta.env.BASE_URL}>
     <span class="brand-mark" aria-hidden="true">✦</span>
     <span class="brand-name">Kimberly Dumaine</span>
   </a>
