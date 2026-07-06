@@ -438,6 +438,8 @@ a { color: var(--cyan); text-decoration: none; }
   inset: 0;
   background: linear-gradient(to bottom, transparent, var(--cyan), transparent);
   animation: scrollDrip 2.6s ease-in-out infinite;
+  will-change: transform;
+  contain: layout paint style;
 }
 @keyframes scrollDrip {
   0% { transform: translateY(-100%); }
@@ -659,6 +661,8 @@ a { color: var(--cyan); text-decoration: none; }
     conic-gradient(from 210deg, transparent, rgba(89, 217, 232, 0.5), transparent 40%,
                    transparent 55%, rgba(107, 79, 216, 0.55), transparent 92%);
   animation: ringSpin 26s linear infinite;
+  will-change: transform;
+  contain: layout paint style;
 }
 @keyframes ringSpin { to { transform: rotate(360deg); } }
 
