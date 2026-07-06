@@ -15,7 +15,7 @@
   --cyan: #59d9e8;
   --white: #f5f3ff;
   --text: #c9cdea;           /* muted lavender body text */
-  --text-dim: #8f93b8;
+  --text-dim: #b4b7d4;
   --hairline: rgba(137, 148, 255, 0.16);
   --glow-cyan: rgba(89, 217, 232, 0.35);
 
@@ -36,7 +36,7 @@ body {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 17px;
-  line-height: 1.75;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -552,6 +552,7 @@ a { color: var(--cyan); text-decoration: none; }
   border-radius: 18px;
   background: linear-gradient(160deg, rgba(19, 26, 69, 0.45), rgba(8, 11, 32, 0.55));
   transition: transform 0.4s ease, border-color 0.4s, box-shadow 0.4s;
+  overflow: hidden;
 }
 .offer-card:hover {
   transform: translateY(-6px);
@@ -566,10 +567,23 @@ a { color: var(--cyan); text-decoration: none; }
 }
 
 .offer-glyph {
-  font-size: 2.5rem;
+  display: inline-block;
   color: var(--cyan);
-  text-shadow: 0 0 16px var(--glow-cyan);
-  margin-top: -20px;
+  position: absolute;
+  top: initial;
+  z-index: 1;
+  opacity: 0.05;
+}
+
+.offer-glyph svg {
+  width: 25rem;
+  height: 25rem;
+  filter: drop-shadow(0 0 10px var(--glow-cyan));
+}
+
+.offer-card h3, .offer-card p {
+  position: relative;
+  z-index: 2;
 }
 
 .offer-card h3 {
