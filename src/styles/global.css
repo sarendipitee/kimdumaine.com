@@ -73,11 +73,12 @@ a { color: var(--cyan); text-decoration: none; }
 /* ─────────────── shared bits ─────────────── */
 
 .section-kicker {
+  display: block;
   font-size: 0.78rem;
   letter-spacing: 0.42em;
   text-transform: uppercase;
   color: var(--cyan);
-  margin-bottom: 18px;
+  margin-bottom: 0.25em;
 }
 .section-kicker.center, .section-title.center { text-align: center; }
 
@@ -795,15 +796,23 @@ a { color: var(--cyan); text-decoration: none; }
 
 .page-hero {
   position: relative;
-  padding: calc(var(--nav-h) + 100px) 0 90px;
+  padding-block: calc(var(--nav-h) + 140px);
   text-align: center;
   background:
     radial-gradient(ellipse 900px 500px at 50% -10%, rgba(69, 39, 160, 0.28), transparent),
     var(--night-0);
   border-bottom: 1px solid var(--hairline);
 }
-.page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 18px; }
-.page-hero p { max-width: 680px; margin: 0 auto; color: var(--text-dim); }
+.page-hero h1 { 
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  margin-bottom: 0.25em; 
+}
+.page-hero p { 
+  max-width: 680px;
+  margin: 0 auto;
+  font-style: italic;
+  color: var(--text-dim); 
+}
 
 /* ═══════════════ PROSE / CONTENT PAGES ═══════════════ */
 
@@ -814,13 +823,13 @@ a { color: var(--cyan); text-decoration: none; }
 
 .prose {
   max-width: 760px;
-	font-size: 1.2em;
-	line-height: 1.6;
+  font-size: 1.2em;
+  line-height: 1.6;
   margin: 0 auto;
-	color: oklch(0.92 0.01 323.22 / 1);
+  color: oklch(0.92 0.01 323.22 / 1);
 }
 .prose p { 
-	color: var(--text); 
+  color: var(--text); 
 }
 .prose h2 { margin: 1.6em 0 0.6em; font-size: clamp(1.5rem, 3vw, 2rem); }
 .prose h2:first-child { margin-top: 0; }
