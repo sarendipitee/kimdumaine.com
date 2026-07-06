@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import portrait from "../assets/kim-portrait.jpg";
+import OfferingCard from "../components/OfferingCard.astro";
+import { offerings } from "../data/offerings";
 ---
 <Layout
   title="Kimberly Dumaine — Psychic Medium, Spiritual Counselor &amp; Trance Channel"
@@ -75,45 +77,19 @@ import portrait from "../assets/kim-portrait.jpg";
     <!-- ═══════════════ OFFERINGS ═══════════════ -->
     <section class="offerings" id="offerings">
       <div class="container">
-        <p class="section-kicker center reveal">Ways to Work Together</p>
+        <span class="section-kicker center reveal">Ways to Work Together</span>
         <h2 class="section-title center reveal">Consultations &amp; <em>Offerings</em></h2>
         <div class="card-grid">
-          <a href={`${import.meta.env.BASE_URL}consultations/`} class="offer-card reveal">
-            <span class="offer-glyph" aria-hidden="true">☽</span>
-            <h3>Life Assessment Sessions</h3>
-            <p>A clairvoyant reading of where you stand — illuminating patterns, blocks, and the many paths open before you.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">→</span></span>
-          </a>
-          <a href={`${import.meta.env.BASE_URL}consultations/`} class="offer-card offer-card-featured reveal">
-            <span class="offer-glyph" aria-hidden="true">✧</span>
-            <h3>Trance Sessions with Dr.&nbsp;Peebles</h3>
-            <p>Speak directly with the spirit of Dr. James Martin Peebles as he answers through Kim in deep trance. Private &amp; group sessions.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">→</span></span>
-          </a>
-          <a href={`${import.meta.env.BASE_URL}consultations/`} class="offer-card reveal">
-            <span class="offer-glyph" aria-hidden="true">❋</span>
-            <h3>Spiritual Counseling</h3>
-            <p>Compassionate one-on-one guidance to move through grief, transition, and awakening with clarity and grace.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">→</span></span>
-          </a>
-          <a href={`${import.meta.env.BASE_URL}consultations/`} class="offer-card reveal">
-            <span class="offer-glyph" aria-hidden="true">✵</span>
-            <h3>Career &amp; Business Counseling</h3>
-            <p>Intuitive insight for decisions, direction, and alignment — bringing your work into harmony with your purpose.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">→</span></span>
-          </a>
-          <a href={`${import.meta.env.BASE_URL}consultations/`} class="offer-card reveal">
-            <span class="offer-glyph" aria-hidden="true">⌂</span>
-            <h3>House &amp; Property Blessing</h3>
-            <p>Energy cleansing and blessing for homes and spaces — clearing what lingers, inviting in light and peace.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">→</span></span>
-          </a>
-          <a href={`${import.meta.env.BASE_URL}consultations/`} class="offer-card reveal">
-            <span class="offer-glyph" aria-hidden="true">🐾</span>
-            <h3>Animal Communication</h3>
-            <p>The animal kingdom speaks. Kim listens — connecting you with the thoughts and feelings of your beloved companions.</p>
-            <span class="card-link">Learn more <span aria-hidden="true">→</span></span>
-          </a>
+          {offerings.map((o, i) => (
+            <OfferingCard
+              icon={o.icon}
+              title={o.title}
+              copy={o.copy}
+              href={`${import.meta.env.BASE_URL}consultations/`}
+              featured={i === 1}
+              reveal
+            />
+          ))}
         </div>
         <div class="offerings-cta reveal">
           <a href={`${import.meta.env.BASE_URL}request-a-session/`} class="btn btn-glow">Request a Private Session</a>
@@ -157,7 +133,7 @@ import portrait from "../assets/kim-portrait.jpg";
     <!-- ═══════════════ MESSAGE FROM KIM ═══════════════ -->
     <section class="message">
       <div class="container message-inner reveal">
-        <p class="section-kicker center">A Message from Kim</p>
+        <span class="section-kicker center">A Message from Kim</span>
         <blockquote>
           <p>
             “I invite you to join with me in an exciting adventure of self-discovery.

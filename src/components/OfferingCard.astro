@@ -1,0 +1,26 @@
+---
+import type { Offering } from "../data/offerings";
+
+interface Props {
+  icon: Offering["icon"];
+  title: string;
+  copy: string;
+  href?: string;
+  featured?: boolean;
+  reveal?: boolean;
+}
+
+const { icon: Icon, title, copy, href, featured = false, reveal = false } = Astro.props;
+const Tag = href ? "a" : "div";
+const classes = [
+  "offer-card",
+  featured && "offer-card-featured",
+  reveal && "reveal",
+].filter(Boolean).join(" ");
+---
+<Tag class={classes} {...(href ? { href } : {})}>
+  <span class="offer-glyph" aria-hidden="true"><Icon /></span>
+  <h3>{title}</h3>
+  <p>{copy}</p>
+  {href && <span class="card-link">Learn more <span aria-hidden="true">→</span></span>}
+</Tag>

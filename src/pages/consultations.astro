@@ -1,14 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const types = [
-  { glyph: "☽", title: "Life Assessment Sessions", copy: "A clairvoyant reading of where you stand — illuminating patterns, blocks, and the many paths open before you." },
-  { glyph: "✧", title: "Trance Session with Dr. Peebles", copy: "Speak directly with the spirit of Dr. James Martin Peebles as he answers through Kim in deep trance. Private & group sessions." },
-  { glyph: "❋", title: "Spiritual Counseling", copy: "Compassionate one-on-one guidance to move through grief, transition, and awakening with clarity and grace." },
-  { glyph: "✵", title: "Career & Business Counseling", copy: "Intuitive insight for decisions, direction, and alignment — bringing your work into harmony with your purpose." },
-  { glyph: "⌂", title: "House & Property Blessing", copy: "Energy cleansing and blessing for homes and spaces — clearing what lingers, inviting in light and peace." },
-  { glyph: "🐾", title: "Animal Communication", copy: "The animal kingdom speaks. Kim listens — connecting you with the thoughts and feelings of your beloved companions." },
-];
+import OfferingCard from "../components/OfferingCard.astro";
+import { offerings } from "../data/offerings";
 ---
 <Layout
   title="Consultations & Offerings — Kimberly Dumaine"
@@ -16,7 +9,7 @@ const types = [
 >
   <section class="page-hero">
     <div class="container">
-      <p class="section-kicker center">Ways to Work Together</p>
+      <span class="section-kicker center">Ways to Work Together</span>
       <h1>Consultations &amp; <em>Offerings</em></h1>
       <p>Thought-provoking, life-changing sessions tailored to your path.</p>
     </div>
@@ -43,12 +36,8 @@ const types = [
         </div>
 
         <div class="type-grid">
-          {types.map((t) => (
-            <div class="offer-card">
-              <span class="offer-glyph" aria-hidden="true">{t.glyph}</span>
-              <h3>{t.title}</h3>
-              <p>{t.copy}</p>
-            </div>
+          {offerings.map((o) => (
+            <OfferingCard icon={o.icon} title={o.title} copy={o.copy} />
           ))}
         </div>
 
