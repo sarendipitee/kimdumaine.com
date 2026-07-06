@@ -78,9 +78,10 @@ a { color: var(--cyan); text-decoration: none; }
   letter-spacing: 0.42em;
   text-transform: uppercase;
   color: var(--cyan);
-  margin-bottom: 0.25em;
+  margin-bottom: 3em;
 }
-.section-kicker.center, .section-title.center { text-align: center; }
+
+.center { text-align: center; }
 
 .text-link {
   display: inline-block;
@@ -819,7 +820,7 @@ a { color: var(--cyan); text-decoration: none; }
 }
 .page-hero h1 { 
   font-size: clamp(2.4rem, 5vw, 3.6rem);
-  margin-bottom: 0.25em; 
+  margin-block: 0.4em; 
 }
 .page-hero p { 
   max-width: 680px;
@@ -827,6 +828,7 @@ a { color: var(--cyan); text-decoration: none; }
   font-style: italic;
   color: var(--text-dim); 
 }
+.page-hero .section-kicker { margin-bottom: 1em; }
 
 /* ═══════════════ PROSE / CONTENT PAGES ═══════════════ */
 
