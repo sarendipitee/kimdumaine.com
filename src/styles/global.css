@@ -451,8 +451,8 @@ a { color: var(--cyan); text-decoration: none; }
   contain: layout paint style;
 }
 @keyframes scrollDrip {
-  0% { transform: translateY(-100%); }
-  60%, 100% { transform: translateY(100%); }
+  0% { transform: translateY(-64px); }
+  60%, 100% { transform: translateY(64px); }
 }
 
 /* ═══════════════ WELCOME ═══════════════ */
