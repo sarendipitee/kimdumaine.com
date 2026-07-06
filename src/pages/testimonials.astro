@@ -31,10 +31,10 @@ const testimonials = [
   <main>
     <section class="page-content">
       <div class="container">
-        <div class="testimonial-grid">
+        <div class="testimonial-rows">
           {testimonials.map((t) => (
-            <blockquote class="testimonial-card">
-              <p>&ldquo;{t.quote}&rdquo;</p>
+            <blockquote class="testimonial-row">
+              <p>{t.quote}</p>
               <cite>{t.who}</cite>
             </blockquote>
           ))}
