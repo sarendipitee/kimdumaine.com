@@ -22,7 +22,7 @@
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-body: "Jost", "Avenir Next", sans-serif;
 
-  --nav-h: 76px;
+  --nav-h: 80px;
   --container: 1160px;
 }
 
@@ -156,10 +156,19 @@ a { color: var(--cyan); text-decoration: none; }
   padding: 0 40px;
   transition: background 0.45s ease, box-shadow 0.45s ease, backdrop-filter 0.45s;
 }
+.site-nav.nav-animate {
+  animation: navEnter 4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 2s;
+}
 .site-nav.scrolled {
   background: rgba(6, 9, 28, 0.82);
   backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 var(--hairline);
+}
+
+@keyframes navEnter {
+  from { opacity: 0; transform: translateY(10%); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .brand {
